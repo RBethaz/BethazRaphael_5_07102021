@@ -1,15 +1,21 @@
 {
   "name": "kanap-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Openclassrooms_P5",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "",
+  "author": "Bethaz Raphael",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RBethaz/BethazRaphael_5_07102021"
   }
 }
