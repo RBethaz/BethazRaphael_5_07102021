@@ -13,7 +13,10 @@
     "express": "^4.16.4",
     "uuid": "^3.3.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^5.55.1",
+    "webpack-cli": "^4.8.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RBethaz/BethazRaphael_5_07102021"
