@@ -66,4 +66,34 @@ then(function (articlesResult) {
         productColors.value = colors;
         productColors.innerHTML = colors;
     }
-})
+
+
+// Gestion du panier
+
+const sendToCartBtn = document.querySelector("#addToCart");
+
+
+// Conditions couleur + quantité entre 1 et 100
+
+sendToCartBtn.addEventListener("click", (event)=>{
+    if (quantityPicked.value > 0 && quantityPicked.value <=100 && colorPicked.value != 0){
+
+
+// Récupération du choix de la couleur
+
+let colorChoice = colorPicked.value;
+
+
+// Récupération du choix de la quantité
+
+let quantityChoice = quantityPicked.value;
+
+
+// Récupération des options de l'article à ajouter au panier
+
+let optionsProduit = {
+    articleID: idProduct,
+    articleColor: colorChoice,
+    articleQuantity: Number(quantityChoice)
+};
+
