@@ -5,6 +5,7 @@ console.table(produitLocalStorage);
 const positionEmptyCart = document.querySelector("#cart__items");
 
 // --> Le panier est vide
+function getCart() {
 if (produitLocalStorage === null || produitLocalStorage == 0) {
     const emptyCart = `<p>Votre panier est vide</p>`;
     positionEmptyCart.innerHTML = emptyCart;
@@ -124,6 +125,7 @@ else {
     }
     )
 }
+}
 // -------------------------------------------------------------------------------
 
 
@@ -148,7 +150,7 @@ function getTotals(){
     totalPrice = 0;
 
     for (var i = 0; i < myLength; ++i) {
-        totalPrice += (elemsQtt[i].valueAsNumber * produitLocalStorage[i].prixProduit);
+        totalPrice += (elemsQtt[i].valueAsNumber * article.articlePrice);
     }
 
     let productTotalPrice = document.getElementById('totalPrice');
