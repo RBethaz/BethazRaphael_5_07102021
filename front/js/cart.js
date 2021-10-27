@@ -13,7 +13,7 @@ if (produitLocalStorage === null || produitLocalStorage == 0) {
 // --> Le panier est plein
 
 else {
-    for (let produit in produitLocalStorage){
+    localStorageArticle.forEach(article => {
 
 
         // Insertion de l'élément "article"
@@ -21,7 +21,7 @@ else {
         let productArticle = document.createElement("article");
         document.querySelector("#cart__items").appendChild(productArticle);
         productArticle.className = "cart__item";
-        productArticle.setAttribute('data-id', produitLocalStorage[produit].idProduit);
+        productArticle.setAttribute('article-id', article.articleID);
 
 
         // Insertion de l'élément "div"
@@ -35,8 +35,8 @@ else {
 
         let productImg = document.createElement("img");
         productDivImg.appendChild(productImg);
-        productImg.src = produitLocalStorage[produit].imgProduit;
-        productImg.alt = produitLocalStorage[produit].altImgProduit;
+        productImg.src = article.articleImg;
+        productImg.alt = article.articleImgAlt;
 
 
         // Insertion de l'élément "div"
@@ -57,14 +57,14 @@ else {
 
         let productTitle = document.createElement("h2");
         productItemContentTitlePrice.appendChild(productTitle);
-        productTitle.innerHTML = produitLocalStorage[produit].nomProduit;
+        productTitle.innerHTML = article.articleName;
 
 
         // Insertion de la couleur
 
         let productColor = document.createElement("p");
         productTitle.appendChild(productColor);
-        productColor.innerHTML = produitLocalStorage[produit].couleurProduit;
+        productColor.innerHTML = article.articleColor;
         productColor.style.fontSize = "20px";
 
 
@@ -72,7 +72,7 @@ else {
 
         let productPrice = document.createElement("p");
         productItemContentTitlePrice.appendChild(productPrice);
-        productPrice.innerHTML = produitLocalStorage[produit].prixProduit + " €";
+        productPrice.innerHTML = article.articlePrice + " €";
 
 
         // Insertion de l'élément "div"
@@ -100,7 +100,7 @@ else {
 
         let productQuantity = document.createElement("input");
         productItemContentSettingsQuantity.appendChild(productQuantity);
-        productQuantity.value = produitLocalStorage[produit].quantiteProduit;
+        productQuantity.value = article.articleQuantity;
         productQuantity.className = "itemQuantity";
         productQuantity.setAttribute("type", "number");
         productQuantity.setAttribute("min", "1");
@@ -122,4 +122,5 @@ else {
         productSupprimer.className = "deleteItem";
         productSupprimer.innerHTML = "Supprimer";
     }
-    }
+    )
+}
