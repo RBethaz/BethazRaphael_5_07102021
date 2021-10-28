@@ -131,26 +131,26 @@ else {
 
 getCart();
 
-function getTotals(){
+function getTotal(){
 
     // Récupération du total des quantités
-    var elemsQtt = document.getElementsByClassName('itemQuantity');
-    var myLength = elemsQtt.length,
-    totalQtt = 0;
+    let articleQuantity = document.getElementsByClassName('itemQuantity');
+    let myLength = articleQuantity.length,
+    articleTotalQuantity = 0;
 
-    for (var i = 0; i < myLength; ++i) {
-        totalQtt += elemsQtt[i].valueAsNumber;
+    for (let i = 0; i < myLength; ++i) {
+        articleTotalQuantity += articleQuantity[i].valueAsNumber;
     }
 
     let productTotalQuantity = document.getElementById('totalQuantity');
-    productTotalQuantity.innerHTML = totalQtt;
-    console.log(totalQtt);
+    productTotalQuantity.innerHTML = articleTotalQuantity;
+    console.log(articleTotalQuantity);
 
     // Récupération du prix total
     totalPrice = 0;
 
-    for (var i = 0; i < myLength; ++i) {
-        totalPrice += (elemsQtt[i].valueAsNumber * article.articlePrice);
+    for (let i = 0; i < myLength; ++i) {
+        totalPrice += (articleQuantity[i].valueAsNumber * localStorageArticle[i].articlePrice);
     }
 
     let productTotalPrice = document.getElementById('totalPrice');
@@ -160,49 +160,50 @@ function getTotals(){
 getTotals();
 
 // Modification d'une quantité de produit
-function modifyQtt() {
-    let qttModif = document.querySelectorAll(".itemQuantity");
+function quantityModification() {
+    let quantityMod = document.querySelectorAll(".itemQuantity");
 
-    for (let k = 0; k < qttModif.length; k++){
-        qttModif[k].addEventListener("change" , (event) => {
+    for (let k = 0; k < quantityMod.length; k++){
+        quantityMod[k].addEventListener("change" , (event) => {
             event.preventDefault();
 
             //Selection de l'element à modifier en fonction de son id ET sa couleur
-            let quantityModif = produitLocalStorage[k].quantiteProduit;
-            let qttModifValue = qttModif[k].valueAsNumber;
+            let quantityModif = localStorageArticle[k].articleQuantity;
+            let quantityModValue = quantityMod[k].valueAsNumber;
 
-            const resultFind = produitLocalStorage.find((el) => el.qttModifValue !== quantityModif);
+            const resultFind = localStorageArticle.find((el) => el.quantityModValue !== quantityModif);
 
-            resultFind.quantiteProduit = qttModifValue;
-            produitLocalStorage[k].quantiteProduit = resultFind.quantiteProduit;
+            resultFind.articleQuantity = quantityModValue;
+            localStorageArticle[k].articleQuantity = resultFind.articleQuantity;
 
-            localStorage.setItem("produit", JSON.stringify(produitLocalStorage));
+            localStorage.setItem("produit", JSON.stringify(localStorageArticle));
 
             // refresh rapide
             location.reload();
         })
     }
 }
-modifyQtt();
+quantityModification();
+
 
 // Suppression d'un produit
 function deleteProduct() {
-    let btn_supprimer = document.querySelectorAll(".deleteItem");
+    let deleteButton = document.querySelectorAll(".deleteItem");
 
-    for (let j = 0; j < btn_supprimer.length; j++){
-        btn_supprimer[j].addEventListener("click" , (event) => {
+    for (let j = 0; j < deleteButton.length; j++){
+        deleteButton[j].addEventListener("click" , (event) => {
             event.preventDefault();
 
             //Selection de l'element à supprimer en fonction de son id ET sa couleur
-            let idDelete = produitLocalStorage[j].idProduit;
-            let colorDelete = produitLocalStorage[j].couleurProduit;
+            let idDelete = localStorageArticle[j].articleID;
+            let colorDelete = localStorageArticle[j].articleColor;
 
-            produitLocalStorage = produitLocalStorage.filter( el => el.idProduit !== idDelete || el.couleurProduit !== colorDelete );
+            localStorageArticle = localStorageArticle.filter( el => el.articleID !== idDelete || el.articleColor !== colorDelete );
 
-            localStorage.setItem("produit", JSON.stringify(produitLocalStorage));
+            localStorage.setItem("produit", JSON.stringify(localStorageArticle));
 
             //Alerte produit supprimé et refresh
-            alert("Ce produit a bien été supprimé du panier");
+            alert("Le produit a bien été supprimé de votre panier");
             location.reload();
         })
     }
@@ -338,7 +339,7 @@ function postForm(){
         address,
         email,
         },
-        products: produitLocalStorage,
+        products: localStorageArticle,
     };
 
         const options = {
