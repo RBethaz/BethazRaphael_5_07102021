@@ -188,11 +188,10 @@ quantityModification();
 
 // Suppression d'un produit
 function deleteProduct() {
-    let deleteButton = document.querySelectorAll(".deleteItem");
+    let deleteBtn = document.querySelectorAll(".deleteItem");
 
-    for (let j = 0; j < deleteButton.length; j++){
-        deleteButton[j].addEventListener("click" , (event) => {
-            event.preventDefault();
+    for (let j = 0; j < deleteBtn.length; j++){
+        deleteBtn[j].addEventListener("click" , (event) => {
 
             //Selection de l'element à supprimer en fonction de son id ET sa couleur
             let idDelete = localStorageArticle[j].articleID;
