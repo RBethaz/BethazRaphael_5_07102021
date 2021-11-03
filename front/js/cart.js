@@ -304,11 +304,11 @@ getForm();
 //console.table(clientLocalStorage);
 
 //Envoi des informations client au localstorage
-function postForm(){
-    const btn_commander = document.getElementById("order");
+function sendForm(){
+    const orderBtn = document.getElementById("order");
 
     //Ecouter le panier
-    btn_commander.addEventListener("click", (event)=>{
+    orderBtn.addEventListener("click", (event)=>{
 
         //Récupération des coordonnées du formulaire client
         let firstName = document.getElementById('firstName').value;
@@ -317,47 +317,56 @@ function postForm(){
         let city = document.getElementById('city').value;
         let email = document.getElementById('email').value;
 
-        /*let clientForm = {
-            firstName,
-            lastName,
-            address,
-            city,
-            email
-        };
-        //Initialisation du local storage
-        let clientLocalStorage = JSON.parse(localStorage.getItem("client"));
-        clientLocalStorage =[];
-        clientLocalStorage.push(clientForm);
-        localStorage.setItem("client", JSON.stringify(clientLocalStorage));
-*/
-    const order = {
-        contact: {
-        firstName,
-        lastName,
-        city,
-        address,
-        email,
-        },
-        products: localStorageArticle,
-    };
+        // Récupération des coordonnées du formulaire client
+
+        let inputName = document.getElementById('firstName');
+        let inputLastName = document.getElementById('lastName');
+        let inputAdress = document.getElementById('address');
+        let inputCity = document.getElementById('city');
+        let inputMail = document.getElementById('email');
+
+
+        // Construction d'un array depuis le local storage
+
+        let cartArticles = [];
+        for (let i = 0; i<localStorageArticle.length;i++) {
+            cartArticles.push(localStorageArticle[i].articleID);
+        }
+        console.log(cartArticles);
+
+        const order = {
+            contact : {
+                firstName: inputName.value,
+                lastName: inputLastName.value,
+                address: inputAdress.value,
+                city: inputCity.value,
+                email: inputMail.value,
+            },
+            products: cartArticles,
+        } 
 
         const options = {
             method: 'POST',
             body: JSON.stringify(order),
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                'Accept': 'application/json', 
+                "Content-Type": "application/json" 
+            },
         };
 
         fetch("http://localhost:3000/api/products/order", options)
-        .then(res => res.json())
+        .then((response) => response.json())
         .then((data) => {
             //localStorage.clear();
+            console.log(data);
+            localStorage.clear();
             localStorage.setItem("orderId", data.orderId);
             console.log("orderId");
-            //document.location.href = "confirmation.html";
+            document.location.href = "confirmation.html";
         })
         .catch((err) => {
-            alert ("Problème avec fetch" + err.message);
+            alert ("Problème avec fetch : " + err.message);
         });
         })
 }
-postForm();
+sendForm(); 
