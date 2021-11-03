@@ -409,7 +409,7 @@ function sendForm(){
                  document.location.href = "./confirmation.html";
              })
              .catch((err) => {
-                alert ("Ca marche poooooo !!! : " + err.message);
+                alert ("Ca marche pas! : " + err.message);
              });
 
 // ------------------------------------------------------------------------------------
