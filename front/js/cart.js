@@ -226,6 +226,7 @@ function getForm() {
 
     let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
     let entryRegExp = new RegExp("^[a-zA-Z ,.'-]+$");
+    let adressRegExp = new RegExp("^[a-zA-Z0-9 ,.'-]+$");
 
     // Ecoute de la modification du prénom
 
@@ -293,7 +294,7 @@ function getForm() {
     const validAddress = function(inputAddress) {
         let addressErrorMsg = inputAddress.nextElementSibling;
 
-        if (entryRegExp.test(inputAddress.value)) {
+        if (adressRegExp.test(inputAddress.value)) {
             addressErrorMsg.innerHTML = '';
         } else {
             addressErrorMsg.innerHTML = 'Veuillez renseigner ce champ.';
