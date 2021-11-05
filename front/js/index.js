@@ -24,6 +24,7 @@ function getArticles() {                                                        
         articlesResult.forEach(article => {                                 
             addArticleBox(document.querySelector(".items"), article)   
         })
+        console.table(articlesResult);
       });
 }
 
